@@ -42,7 +42,7 @@ class SourceCreatedMigrationCommand extends ModeratedCommand
     protected function configure()
     {
         $this
-            ->setName('mautic:source:created:cotnacts:migration')
+            ->setName('mautic:source:created:contacts:migration')
             ->setDescription('Created contacts source migration')
             ->setHelp('Created contacts source migration');
 
