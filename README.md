@@ -9,6 +9,10 @@
 3. Clear cache (app/cache/prod/)
 4. Go to /s/plugins/reload
 
+### Command to sync
+
+php /app/console mautic:source:created:contacts:migration
+
 ## More Mautic stuff
 
 - Plugins from Mautic Extendee Family  https://mtcextendee.com/plugins
