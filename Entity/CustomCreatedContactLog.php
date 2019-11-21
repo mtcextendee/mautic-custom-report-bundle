@@ -17,9 +17,11 @@ use Mautic\ApiBundle\Serializer\Driver\ApiMetadataDriver;
 use Mautic\CoreBundle\Doctrine\Mapping\ClassMetadataBuilder;
 use Mautic\LeadBundle\Entity\Lead;
 use Mautic\LeadBundle\Entity\LeadEventLog;
+use phpDocumentor\Reflection\Types\Self_;
 
-class CustomLog
+class CustomCreatedContactLog
 {
+    CONST TABLE = 'custom_created_contact_log';
     /**
      * @var int
      */
@@ -57,8 +59,8 @@ class CustomLog
     public static function loadMetadata(ORM\ClassMetadata $metadata)
     {
         $builder = new ClassMetadataBuilder($metadata);
-        $builder->setTable('custom_contact_log')
-            ->setCustomRepositoryClass(CustomLogRepository::class)
+        $builder->setTable(self::TABLE)
+            ->setCustomRepositoryClass(CustomCreatedContactLogRepository::class)
             ->addId()
             ->addIndex(['url', 'date_added'], 'url_date_added')
             ->addIndex(['date_added'], 'date_added');
@@ -90,7 +92,7 @@ class CustomLog
      */
     public static function loadApiMetadata(ApiMetadataDriver $metadata)
     {
-        $metadata->setGroupPrefix('custom_log')
+        $metadata->setGroupPrefix(self::TABLE)
             ->addListProperties(
                 [
                     'id',
@@ -154,7 +156,7 @@ class CustomLog
     /**
      * @param string $url
      *
-     * @return CustomLog
+     * @return CustomCreatedContactLog
      */
     public function setUrl($url)
     {
@@ -174,7 +176,7 @@ class CustomLog
     /**
      * @param Lead $lead
      *
-     * @return CustomLog
+     * @return CustomCreatedContactLog
      */
     public function setLead($lead)
     {
@@ -194,7 +196,7 @@ class CustomLog
     /**
      * @param LeadEventLog $log
      *
-     * @return CustomLog
+     * @return CustomCreatedContactLog
      */
     public function setLog($log)
     {

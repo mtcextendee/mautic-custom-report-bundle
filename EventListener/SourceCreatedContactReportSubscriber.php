@@ -17,6 +17,7 @@ use Mautic\LeadBundle\Report\FieldsBuilder;
 use Mautic\ReportBundle\Event\ReportBuilderEvent;
 use Mautic\ReportBundle\Event\ReportGeneratorEvent;
 use Mautic\ReportBundle\ReportEvents;
+use MauticPlugin\MauticCustomReportBundle\Entity\CustomCreatedContactLog;
 
 class SourceCreatedContactReportSubscriber extends CommonSubscriber
 {
@@ -70,7 +71,7 @@ class SourceCreatedContactReportSubscriber extends CommonSubscriber
                 'type'  => 'datetime',
             ],
             'hits' => [
-                'formula'=>'(SELECT COUNT(ccl2.url) FROM '.MAUTIC_TABLE_PREFIX.'custom_contact_log ccl2 
+                'formula'=>'(SELECT COUNT(ccl2.url) FROM '.MAUTIC_TABLE_PREFIX.CustomCreatedContactLog::TABLE.' ccl2 
 INNER JOIN '.MAUTIC_TABLE_PREFIX.'leads l ON l.id = ccl2.lead_id AND l.email IS NOT NULL
 WHERE ccl2.date_added BETWEEN :dateFrom AND :dateTo AND ccl2.url = ccl.url)',
                 'label' => 'mautic.customreport.report.hits',
@@ -100,7 +101,7 @@ WHERE ccl2.date_added BETWEEN :dateFrom AND :dateTo AND ccl2.url = ccl.url)',
         }
 
         $qb = $event->getQueryBuilder();
-        $qb->from(MAUTIC_TABLE_PREFIX.'custom_contact_log', 'ccl');
+        $qb->from(MAUTIC_TABLE_PREFIX.CustomCreatedContactLog::TABLE, 'ccl');
         $qb->innerJoin('ccl',MAUTIC_TABLE_PREFIX.'leads', 'l', 'l.id = ccl.lead_id AND l.email IS NOT NULL');
 
 

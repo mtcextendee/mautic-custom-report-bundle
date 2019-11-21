@@ -13,6 +13,7 @@ namespace MauticPlugin\MauticCustomReportBundle\Command;
 
 use Doctrine\ORM\EntityManager;
 use Mautic\CoreBundle\Command\ModeratedCommand;
+use MauticPlugin\MauticCustomReportBundle\Entity\CustomCreatedContactLog;
 use phpDocumentor\Reflection\Types\Parent_;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -59,16 +60,17 @@ class SourceCreatedMigrationCommand extends ModeratedCommand
             return 0;
         }
 
-        $maxIdQuery = 'SELECT MAX(ccl.log_id) FROM '.MAUTIC_TABLE_PREFIX.'custom_contact_log ccl';
-        $maxLogId =  (int) $this->entityManager->getConnection()->query($maxIdQuery)->fetchColumn();
+        $maxIdQuery = 'SELECT MAX(ccl.log_id) FROM '.MAUTIC_TABLE_PREFIX.CustomCreatedContactLog::TABLE.' ccl';
+        $maxLogId   = (int) $this->entityManager->getConnection()->query($maxIdQuery)->fetchColumn();
 
-        $countQuery = 'SELECT COUNT(lel.id) FROM '.$this->getLeadEventLogQueryPart().' AND lel.id > '.$maxLogId;
-        $numberOfImportedRows =   $this->entityManager->getConnection()->query($countQuery)->fetchColumn();
+        $countQuery           = 'SELECT COUNT(lel.id) FROM '.$this->getLeadEventLogQueryPart(
+            ).' AND lel.id > '.$maxLogId;
+        $numberOfImportedRows = $this->entityManager->getConnection()->query($countQuery)->fetchColumn();
 
-        $query = 'INSERT INTO '.MAUTIC_TABLE_PREFIX.'custom_contact_log (lead_id, log_id, url, date_added)
+        $query = 'INSERT INTO '.MAUTIC_TABLE_PREFIX.CustomCreatedContactLog::TABLE.' (lead_id, log_id, url, date_added)
 SELECT lel.lead_id, lel.id,ph.url,lel.date_added FROM '.$this->getLeadEventLogQueryPart();
         if ($maxLogId) {
-            $query.= ' AND lel.id > '.$maxLogId;
+            $query .= ' AND lel.id > '.$maxLogId;
         }
         $this->entityManager->getConnection()->query($query);
 

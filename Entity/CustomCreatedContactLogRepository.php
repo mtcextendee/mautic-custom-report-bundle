@@ -13,6 +13,6 @@ namespace MauticPlugin\MauticCustomReportBundle\Entity;
 
 use Mautic\CoreBundle\Entity\CommonRepository;
 
-class CustomLogRepository extends CommonRepository
+class CustomCreatedContactLogRepository extends CommonRepository
 {
 }
