@@ -11,7 +11,8 @@ namespace MauticPlugin\MauticCustomReportBundle\Integration;
 use Mautic\PluginBundle\Integration\AbstractIntegration;
 
 
-class CustomReportIntegration extends AbstractIntegration
+class
+CustomReportIntegration extends AbstractIntegration
 {
     const INTEGRATION_NAME = 'CustomReport';
 
