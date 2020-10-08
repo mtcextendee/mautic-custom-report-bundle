@@ -11,7 +11,7 @@
 
 ### Command to sync
 
-php /app/console mautic:source:created:contacts:migration
+php bin/console mautic:source:created:contacts:migration
 
 ## More Mautic stuff
 

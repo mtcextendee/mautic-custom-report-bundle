@@ -11,15 +11,15 @@
 
 namespace MauticPlugin\MauticCustomReportBundle\EventListener;
 
-use Mautic\CoreBundle\EventListener\CommonSubscriber;
 use Mautic\LeadBundle\EventListener\ReportSubscriber;
 use Mautic\LeadBundle\Report\FieldsBuilder;
 use Mautic\ReportBundle\Event\ReportBuilderEvent;
 use Mautic\ReportBundle\Event\ReportGeneratorEvent;
 use Mautic\ReportBundle\ReportEvents;
 use MauticPlugin\MauticCustomReportBundle\Entity\CustomCreatedContactLog;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class SourceCreatedContactReportSubscriber extends CommonSubscriber
+class SourceCreatedContactReportSubscriber implements EventSubscriberInterface
 {
     const SOURCE_CREATED_CONTACT = 'source.created_contact';
 

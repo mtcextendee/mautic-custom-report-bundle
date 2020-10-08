@@ -11,16 +11,15 @@
 
 namespace MauticPlugin\MauticCustomReportBundle\EventListener;
 
-use Mautic\CoreBundle\EventListener\CommonSubscriber;
 use Mautic\LeadBundle\EventListener\ReportSubscriber;
 use Mautic\LeadBundle\Model\CompanyReportData;
 use Mautic\LeadBundle\Report\FieldsBuilder;
 use Mautic\ReportBundle\Event\ReportBuilderEvent;
 use Mautic\ReportBundle\Event\ReportGeneratorEvent;
 use Mautic\ReportBundle\ReportEvents;
-use MauticPlugin\MauticCustomReportBundle\Entity\CustomCreatedContactLog;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class ContactCompanyDateAddedReportSubscriber extends CommonSubscriber
+class ContactCompanyDateAddedReportSubscriber implements EventSubscriberInterface
 {
     const CONTACT_COMPANY_DATEADDED = 'contact.company_date_added';
 
